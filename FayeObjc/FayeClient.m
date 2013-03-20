@@ -123,6 +123,12 @@
   } else {
     NSLog(@"Error %@", [error localizedDescription]);
   }
+
+  self.webSocketConnected = NO;
+  fayeConnected = NO;
+  if(self.delegate != NULL && [self.delegate respondsToSelector:@selector(disconnectedFromServer)]) {
+    [self.delegate disconnectedFromServer];
+  }
 }
 
 -(void)webSocket:(ZTWebSocket *)webSocket didReceiveMessage:(NSString*)message {
